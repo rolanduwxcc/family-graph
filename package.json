@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/rolanduwxcc/family-graph#readme",
   "dependencies": {
-    "mongoose": "^5.12.8"
+
   }
 }
