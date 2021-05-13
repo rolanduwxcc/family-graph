@@ -1,0 +1,23 @@
+{
+  "name": "family-graph",
+  "version": "1.0.0",
+  "description": "Family Graph Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolanduwxcc/family-graph.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rolanduwxcc/family-graph/issues"
+  },
+  "homepage": "https://github.com/rolanduwxcc/family-graph#readme",
+  "dependencies": {
+
+  }
+}
