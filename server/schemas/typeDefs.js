@@ -7,7 +7,16 @@ const typeDefs = gql`
         username: String
         email: String
     }
-    
+
+    type Unit {
+        _if: ID
+        userId: User
+        mother: Unit
+        father: Unit
+        siblings: [Unit]
+        children: [Unit]
+    }
+
     type Query {
         users: [User]
     }
