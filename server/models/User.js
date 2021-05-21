@@ -20,7 +20,7 @@ const userSchema = new Schema(
             required: true,
             minlength: 3
         },
-        unitDocument: {
+        unitLink: {
             type: Schema.Types.ObjectId,
             ref: 'Unit'
         }

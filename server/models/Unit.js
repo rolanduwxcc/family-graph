@@ -19,15 +19,15 @@ const unitSchema = new Schema(
                 trim: true
             }
         ],
-        ancestorX: {
+        mother: {
             type: Schema.Types.ObjectId,
             ref: 'Unit'
         },
-        ancestorY: {
+        father: {
             type: Schema.Types.ObjectId,
             ref: 'Unit'
         },
-        descendants: [
+        children: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Unit'

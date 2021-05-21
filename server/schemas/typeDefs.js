@@ -22,11 +22,24 @@ const typeDefs = gql`
         imageLink: String
     }
 
-    type Query {
-        users: [User]
-
+    type Auth {
+        token: ID!
+        user: User
     }
-`;
+
+    type Query {
+        me: User
+        user(username: String!): User
+        users: [User]
+        unit(_id: ID!): Unit
+        units(username: String): [Unit]
+    }
+    
+    type Mutation {
+        login(email: String!, password: String!): Auth
+        addUser(username: String!, email: String!, password: String!): Auth
+        addUnit(firstName: String!, lastNames: [String]!): Unit
+    }
 `;
 
 module.exports = typeDefs;
