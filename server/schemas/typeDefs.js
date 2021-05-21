@@ -6,19 +6,25 @@ const typeDefs = gql`
         _id: ID
         username: String
         email: String
+        unitLink: [Unit]
     }
 
     type Unit {
-        _if: ID
-        userId: User
+        _id: ID
+        firstName: String
+        lastNames: [String]
+        otherNames: [String]
         mother: Unit
         father: Unit
-        siblings: [Unit]
         children: [Unit]
+        birthCountry: String
+        homeCountry: String
+        imageLink: String
     }
 
     type Query {
         users: [User]
+
     }
 `;
 `;
