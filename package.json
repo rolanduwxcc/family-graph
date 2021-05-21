@@ -4,20 +4,27 @@
   "description": "Family Graph Application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "cd server && npm start",
+    "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rolanduwxcc/family-graph.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "BMW",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rolanduwxcc/family-graph/issues"
   },
   "homepage": "https://github.com/rolanduwxcc/family-graph#readme",
+  "devDependencies": {
+    "concurrently": "^6.1.0"
+  },
   "dependencies": {
-
+    "if-env": "^1.0.4"
   }
 }
