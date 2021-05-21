@@ -1,3 +1,5 @@
-const User = require('./User');
+const User = require('./User')
+const Family = require('./Family')
+const Member = require('./Member')
 
-module.exports = { User };
+module.exports = { User, Family, Member };
