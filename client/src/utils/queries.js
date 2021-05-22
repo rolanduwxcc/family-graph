@@ -45,9 +45,9 @@ export const QUERY_UNIT = gql`
           _id
           firstName
           lastName
-          otherNames {
-              firstName
-          }
+          otherNames: [{
+              name:''
+          }]
           mother
           father
           children {
