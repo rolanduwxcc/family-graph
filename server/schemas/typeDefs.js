@@ -42,6 +42,7 @@ const typeDefs = gql`
         editUnit(_id: ID!): Unit
         removeUnit(_id: ID!): Unit
     }
+    
 `;
 
 module.exports = typeDefs;
