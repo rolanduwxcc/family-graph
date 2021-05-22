@@ -28,22 +28,36 @@ const resolvers = {
     },
     
     Mutation: {
-        
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
+            const token = signToken(user);
+
+            return { token, user };
+        },
+
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+            
+            if (!user) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const token = signToken(user);
+            return { token, user };
+
+        },
+
+        // addUnit(){},
+        // editUnit(){},
+        // removeUnit(){}
     }
 
-    // type Query {
-    //     me: User
-    //     user(username: String!): User
-    //     users: [User]
-    //     unit(_id: ID!): Unit
-    //     units(username: String): [Unit]
-    // }
-    
-    // type Mutation {
-    //     login(email: String!, password: String!): Auth
-    //     addUser(username: String!, email: String!, password: String!): Auth
-    //     addUnit(firstName: String!, lastNames: [String]!): Unit
-    // }
-};
 
+};
 module.exports = resolvers;
