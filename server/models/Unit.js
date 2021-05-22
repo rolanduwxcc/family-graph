@@ -7,12 +7,10 @@ const unitSchema = new Schema(
             required: true,
             trim: true
         },
-        lastNames: [
-            {
-                type: String,
-                trim: true
-            }
-        ],
+        lastName:   {
+            type: String,
+            trim: true
+        },
         otherNames: [
             {
                 type: String,

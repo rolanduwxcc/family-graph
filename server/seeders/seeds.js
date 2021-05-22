@@ -8,69 +8,62 @@ db.once('open', async () => {
   await Unit.deleteMany({});
   await User.deleteMany({});
 
-  // create user data
+  // CREATE USER DATA
   const userData = [];
-
-  for (let i = 0; i < 5; i += 1) {
+  for (let i = 0; i < 10; i += 1) {
     const username = faker.internet.userName();
     const email = faker.internet.email(username);
     const password = "pass";
 
     userData.push({ username, email, password });
   }
-
   const createdUsers = await User.collection.insertMany(userData);
 
-  // create units
-  for (let i = 0; i < 100; i += 1) {
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { _id: userId } = createdUsers.ops[randomUserIndex];
+  // CREATE UNIT DATA WITH NOT PARENTS/CHILDREN
+  const unitData = []
+  for (let i = 0; i < 50; i += 1) {
+    const firstName = faker.name.firstName();
+    const lastName = faker.name.lastName();
+    const birthCountry = faker.address.country();
+    const homeCountry = faker.address.country();
+    const imageLink= faker.image.people();
 
-    let friendId = userId;
+    unitData.push({ firstName, lastName, birthCountry, homeCountry, imageLink });
+  }
+  const createdUnits = await Unit.collection.insertMany(unitData);
 
-    while (friendId === userId) {
-      const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-      friendId = createdUsers.ops[randomUserIndex];
+  // CREATE UNITS WITH MOTHER, FATHER, CHILDREN SET FROM ABOVE
+  const moreUnitData = [];
+  for (let i=0; i < 50; i+= 1) {
+    const randomUserIndex = Math.floor(Math.random() * createdUnits.ops.length);
+
+    const unitCountTest = 50 - randomUserIndex;
+    if (unitCountTest > 3) {
+      const firstName = faker.name.firstName();
+      const lastName = faker.name.lastName();
+      const birthCountry = faker.address.country();
+      const homeCountry = faker.address.country();
+      const imageLink= faker.image.people();
+      const father = createdUnits.ops[randomUserIndex + 1];
+      const mother = createdUnits.ops[randomUserIndex + 2];
+      const children = [createdUnits.ops[randomUserIndex + 3]];
+      moreUnitData.push({ firstName, lastName, birthCountry, homeCountry, imageLink, father, mother, children });
+    } 
+    else {
+      const firstName = faker.name.firstName();
+      const lastName = faker.name.lastName();
+      const birthCountry = faker.address.country();
+      const homeCountry = faker.address.country();
+      const imageLink= faker.image.people();
+      const father = createdUnits.ops[randomUserIndex - 1];
+      const mother = createdUnits.ops[randomUserIndex - 2];
+      const child = [createdUnits.ops[randomUserIndex - 3]] ;
+      moreUnitData.push({ firstName, lastName, birthCountry, homeCountry, imageLink, father, mother, child });
     }
-
-    await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
   }
-
-  // create thoughts
-  let createdThoughts = [];
-  for (let i = 0; i < 100; i += 1) {
-    const thoughtText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
-
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { username, _id: userId } = createdUsers.ops[randomUserIndex];
-
-    const createdThought = await Thought.create({ thoughtText, username });
-
-    const updatedUser = await User.updateOne(
-      { _id: userId },
-      { $push: { thoughts: createdThought._id } }
-    );
-
-    createdThoughts.push(createdThought);
-  }
-
-  // create reactions
-  for (let i = 0; i < 100; i += 1) {
-    const reactionBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
-
-    const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    const { username } = createdUsers.ops[randomUserIndex];
-
-    const randomThoughtIndex = Math.floor(Math.random() * createdThoughts.length);
-    const { _id: thoughtId } = createdThoughts[randomThoughtIndex];
-
-    await Thought.updateOne(
-      { _id: thoughtId },
-      { $push: { reactions: { reactionBody, username } } },
-      { runValidators: true }
-    );
-  }
-
+  console.log(moreUnitData);
+  Unit.collection.insertMany(moreUnitData);
+  console.log('wlr done');
   console.log('all done!');
   process.exit(0);
 });
