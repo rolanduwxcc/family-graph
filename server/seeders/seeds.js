@@ -2,26 +2,26 @@
 const faker = require('faker');
 
 const db = require('../config/connection');
-const { Thought, User } = require('../models');
+const { Unit, User } = require('../models');
 
 db.once('open', async () => {
-  await Thought.deleteMany({});
+  await Unit.deleteMany({});
   await User.deleteMany({});
 
   // create user data
   const userData = [];
 
-  for (let i = 0; i < 50; i += 1) {
+  for (let i = 0; i < 5; i += 1) {
     const username = faker.internet.userName();
     const email = faker.internet.email(username);
-    const password = faker.internet.password();
+    const password = "pass";
 
     userData.push({ username, email, password });
   }
 
   const createdUsers = await User.collection.insertMany(userData);
 
-  // create friends
+  // create units
   for (let i = 0; i < 100; i += 1) {
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const { _id: userId } = createdUsers.ops[randomUserIndex];

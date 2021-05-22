@@ -2,14 +2,14 @@
   "name": "server",
   "version": "1.0.0",
   "description": "family-graph server",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon",
     "seed": "node seeders/seeds.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "BMW",
   "license": "MIT",
   "dependencies": {
     "apollo-server-express": "^2.24.0",
