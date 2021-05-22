@@ -32,7 +32,7 @@ const typeDefs = gql`
         user(username: String!): User
         users: [User]
         unit(_id: ID!): Unit
-        units(username: String): [Unit]
+        units: [Unit]
     }
     
     type Mutation {
