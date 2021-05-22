@@ -62,8 +62,8 @@ db.once('open', async () => {
     }
   }
   console.log(moreUnitData);
-  Unit.collection.insertMany(moreUnitData);
-  console.log('wlr done');
+  const result = await Unit.collection.insertMany(moreUnitData);
+  console.log('wlr done', result.acknowledged);
   console.log('all done!');
   process.exit(0);
 });
