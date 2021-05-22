@@ -53,9 +53,24 @@ const resolvers = {
 
         },
 
-        // addUnit(){},
+        addUnit: async (parent, args, context) => {
+            if (context.user) {
+                const unit = await Unit.create({ ...args });
+                return unit;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        removeUnit: async (parent, { unitObjectId }, context) => {
+            if (context.user) {
+                const removedUnit = await Unit.deleteOne({ _id: unitObjectId })
+                return removedUnit;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
         // editUnit(){},
-        // removeUnit(){}
+
     }
 
 

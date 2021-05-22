@@ -12,7 +12,7 @@ const typeDefs = gql`
     type Unit {
         _id: ID
         firstName: String
-        lastNames: [String]
+        lastName: String
         otherNames: [String]
         mother: Unit
         father: Unit
@@ -38,10 +38,23 @@ const typeDefs = gql`
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addUnit(firstName: String!, lastNames: [String]!): Unit
+        
+        addUnit(post: NewUnitInput): Unit
+                  
         editUnit(_id: ID!): Unit
+        
         removeUnit(_id: ID!): Unit
     }
+    input NewUnitInput {
+        firstName: String! 
+        lastName: String! 
+        otherNames: [String]
+        birthCountry: String
+        homeCountry: String
+        imageLink: String
+    }
+
+
 `;
 
 module.exports = typeDefs;
