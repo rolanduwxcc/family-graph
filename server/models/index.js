@@ -1,5 +1,4 @@
 const User = require('./User')
-const Family = require('./Family')
-const Member = require('./Member')
+const Unit = require('./Unit')
 
-module.exports = { User, Family, Member };
+module.exports = { User, Unit };
