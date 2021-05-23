@@ -13,7 +13,7 @@ const typeDefs = gql`
         _id: ID
         firstName: String
         lastName: String
-        otherNames: [String]
+        otherNames: String
         mother: Unit
         father: Unit
         children: [Unit]

@@ -22,3 +22,31 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_UNIT = gql`
+  mutation addUnit($firstName: String!) {
+    addUnit(firstName: $firstName) {
+      _id
+      firstName
+      lastNames
+      otherNames
+      mother
+      father
+      children {
+        firstName
+        lastName
+      }
+      birthCountry
+      homeCountry
+      imageLink
+    }
+  }
+`;
+
+export const REMOVE_UNIT = gql`
+  mutation removeUnit($_id: ID!) {
+    removeUnit(_id: $id) {
+      _id
+    }
+  }
+`;
