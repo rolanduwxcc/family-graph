@@ -14,19 +14,22 @@ const resolvers = {
         user: async (parent, { username }) => {
             return User.findOne({ username }).select('-__v -password');
         },
-        users: async() => {
+        users: async () => {
             return User.find().select('-__v -password');
         },
 
         unit: async (parent, { _id }) => {
-            return Unit.findOne({ _id });
+            return Unit.findOne({ _id })
+                .populate('mother')
+                .populate('father');
         },
 
-        units: async() => {
+        units: async () => {
             return Unit.find().select('-__v');
-        }
+        },
+        
     },
-    
+
     Mutation: {
         addUser: async (parent, args) => {
             const user = await User.create(args);
@@ -37,7 +40,7 @@ const resolvers = {
 
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
-            
+
             if (!user) {
                 throw new AuthenticationError('Incorrect credentials');
             }
@@ -67,7 +70,32 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-        // editUnit(){},
+
+        addMother: async (parent, { childId, parentId }, context) => {
+            if (context.user) {
+                const updatedUnit = await Unit.findOneAndUpdate(
+                    { _id: childId },
+                    { $set: { mother: parentId } },
+                    { new: true }
+                ).populate('mother');
+
+                return updatedUnit;
+            }
+
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        addFather: async (parent, { childId, parentId }) => {
+
+            const updatedUnit = await Unit.findOneAndUpdate(
+                { _id: childId },
+                { $set: { father: parentId } },
+                { new: true }
+            ).populate('father');
+
+            return updatedUnit;
+
+        }
 
     }
 

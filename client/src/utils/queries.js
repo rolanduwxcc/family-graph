@@ -63,8 +63,8 @@ export const QUERY_UNIT = gql`
 `;
 
 export const QUERY_UNITS = gql`
- query units($username: String) {
-     units(username: $username) {
+ query {
+     units {
          _id
          firstName
           lastName
@@ -75,9 +75,7 @@ export const QUERY_UNITS = gql`
           father {
               firstName
           }
-          children {
-              firstName
-          }
+          children
           birthCountry
           homeCountry
           imageLink

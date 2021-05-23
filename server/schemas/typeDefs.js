@@ -16,7 +16,7 @@ const typeDefs = gql`
         otherNames: String
         mother: Unit
         father: Unit
-        children: [Unit]
+        children: String
         birthCountry: String
         homeCountry: String
         imageLink: String
@@ -39,21 +39,24 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         
-        addUnit(post: NewUnitInput): Unit
-                  
-        editUnit(_id: ID!): Unit
-        
+        addUnit(post: NewUnitInput): Unit      
         removeUnit(_id: ID!): Unit
+
+        addMother(childId: ID!, parentId: ID!): Unit
+        addFather(childId: ID!, parentId: ID!): Unit
     }
+
     input NewUnitInput {
         firstName: String! 
         lastName: String! 
-        otherNames: [String]
+        otherNames: String
+        children: String
         birthCountry: String
         homeCountry: String
         imageLink: String
     }
 
+    
 
 `;
 

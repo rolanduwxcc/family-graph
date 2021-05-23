@@ -24,12 +24,11 @@ const unitSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Unit'
         },
-        children: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Unit'
-            }
-        ],
+        children: {
+            type: String,
+            trim: true
+        }
+        ,
         birthCountry: {
             type: String,
             trim: true
@@ -53,6 +52,17 @@ const unitSchema = new Schema(
 unitSchema.virtual('descendantCount').get(function() {
     return this.descendants.length;
 })
+
+unitSchema.pre('findOne', function(next) {
+    this.populate('mother').populate('father');
+    next();
+});
+
+// unitSchema.pre('find', function(next) {
+//     this.populate('mother').populate('father');
+//     next();
+// });
+
 
 const Unit = model('Unit', unitSchema);
 module.exports = Unit;
