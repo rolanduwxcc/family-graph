@@ -11,12 +11,11 @@ const unitSchema = new Schema(
             type: String,
             trim: true
         },
-        otherNames: [
+        otherNames: 
             {
                 type: String,
                 trim: true
-            }
-        ],
+            },
         mother: {
             type: Schema.Types.ObjectId,
             ref: 'Unit'

@@ -28,10 +28,8 @@ export const ADD_UNIT = gql`
     addUnit(firstName: $firstName) {
       _id
       firstName
-      lastName
-      otherNames {
-        firstName
-      }
+      lastNames
+      otherNames
       mother
       father
       children {
