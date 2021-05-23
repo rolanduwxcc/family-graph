@@ -58,6 +58,11 @@ unitSchema.pre('findOne', function(next) {
     next();
 });
 
+// unitSchema.pre('find', function(next) {
+//     this.populate('mother').populate('father');
+//     next();
+// });
+
 
 const Unit = model('Unit', unitSchema);
 module.exports = Unit;

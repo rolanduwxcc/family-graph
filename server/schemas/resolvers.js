@@ -20,17 +20,14 @@ const resolvers = {
 
         unit: async (parent, { _id }) => {
             return Unit.findOne({ _id })
-                .select('-__v -password')
                 .populate('mother')
                 .populate('father');
         },
 
         units: async () => {
-            return Unit.find()
-                .select('-__v')
-                .populate('mother')
-                .populate('father');
-        }
+            return Unit.find().select('-__v');
+        },
+        
     },
 
     Mutation: {
