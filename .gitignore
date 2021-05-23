@@ -1,6 +1,6 @@
 scratch.*
-auth.js
-server/utils/auth.js
+# auth.js
+# server/utils/auth.js
 # Logs
 logs
 *.log
