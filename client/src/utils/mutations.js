@@ -42,3 +42,11 @@ export const ADD_UNIT = gql`
     }
   }
 `;
+
+export const REMOVE_UNIT = gql`
+  mutation removeUnit($_id: ID!) {
+    removeUnit(_id: $id) {
+      _id
+    }
+  }
+`;
