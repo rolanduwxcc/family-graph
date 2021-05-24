@@ -16,15 +16,6 @@ const Unit = props => {
 
     const unit = data?.unit || {};
 
-
-    //from deep thoughts but not certain how to implement for ours
-    // if (
-    //     Auth.loggedIn() &&
-    //     Auth.getProfile().data.username === userParam
-    //   ) {
-    //     return <Redirect to="/profile" />;
-    //   }
-
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -36,9 +27,6 @@ const Unit = props => {
           <UnitCard/>
         </div>
         </Link>
-        <div>
-          <button onclick={addParent}>Add parent</button>
-        </div>
       </div>
     );
 
