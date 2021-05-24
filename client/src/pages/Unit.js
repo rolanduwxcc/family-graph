@@ -5,6 +5,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { QUERY_USER, QUERY_ME, QUERY_UNIT } from '../utils/queries';
 import { ADD_UNIT } from '../utils/mutations';
 import Auth from '../utils/auth';
+import UnitCard from '../components/UnitCard';
 
 const Unit = props => {
     const { firstName: unitParam } = useParams();
@@ -31,19 +32,13 @@ const Unit = props => {
     return (
       <div className="card px-1 py-1">
         <Link to={`/unit/${_id}`}>
-          <img
-            
-            src={`/images/${imageLink}`}
-          />
-          <p>{firstName}</p>
-          <p>{lastName}</p>
-          <p>{otherNames}</p>
-          <p>{mother}</p>
-          <p>{father}</p>
-          <p>{children}</p>
-          <p>{birthCountry}</p>
-          <p>{homeCountry}</p>
+        <div>
+          <UnitCard/>
+        </div>
         </Link>
+        <div>
+          <button onclick={addParent}>Add parent</button>
+        </div>
       </div>
     );
 
