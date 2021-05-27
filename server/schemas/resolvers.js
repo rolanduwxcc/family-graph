@@ -1,107 +1,102 @@
-const { User, Unit } = require('../models');
-const { AuthenticationError } = require('apollo-server-express');
-const { signToken } = require('../utils/auth');
+const { User, Unit } = require("../models");
+const { AuthenticationError } = require("apollo-server-express");
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
-
-    Query: {
-        me: async (parent, args, context) => {
-            if (context.user) {
-                const userData = await User.findOne({ _id: context.user._id })
-                    .select('-__v -password');
-            }
-        },
-        user: async (parent, { username }) => {
-            return User.findOne({ username }).select('-__v -password');
-        },
-        users: async () => {
-            return User.find().select('-__v -password');
-        },
-
-        unit: async (parent, { _id }) => {
-            return Unit.findOne({ _id })
-                .populate('mother')
-                .populate('father');
-        },
-
-        units: async () => {
-            return Unit.find().select('-__v');
-        },
-        
+  Query: {
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
+        return userData;
+      }
+      throw new AuthenticationError("Not logged in");
+    },
+    user: async (parent, { username }) => {
+      return User.findOne({ username }).select("-__v -password");
+    },
+    users: async () => {
+      return User.find().select("-__v -password");
     },
 
-    Mutation: {
-        addUser: async (parent, args) => {
-            const user = await User.create(...args);
-            const token = signToken(user);
+    unit: async (parent, { _id }) => {
+      return Unit.findOne({ _id }).populate("mother").populate("father");
+    },
 
-            return { token, user };
-        },
+    units: async () => {
+      return Unit.find().select("-__v");
+    },
+  },
 
-        login: async (parent, { email, password }) => {
-            // let email2 = "Laisha.Ziemann_Bergnaum11@gmail.com"
-            // let password = "pass"
-            const user = await User.findOne({ email2 });
+  Mutation: {
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
 
-            if (!user) {
-                throw new AuthenticationError('Incorrect credentials');
-            }
+      return { token, user };
+    },
 
-            const correctPw = await user.isCorrectPassword(password);
+    login: async (parent, { email, password }) => {
+      // let email2 = "Laisha.Ziemann_Bergnaum11@gmail.com"
+      // let password = "pass"
+      const user = await User.findOne({ email });
 
-            if (!correctPw) {
-                throw new AuthenticationError('Incorrect credentials');
-            }
-            
-            
-            const token = signToken(user);
-            return { token, user };
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
 
-        },
+      const correctPw = await user.isCorrectPassword(password);
 
-        addUnit: async (parent, args, context) => {
-            if (context.user) {
-                const unit = await Unit.create({ ...args });
-                return unit;
-            }
-            throw new AuthenticationError('You need to be logged in!');
-        },
-        removeUnit: async (parent, { unitObjectId }, context) => {
-            if (context.user) {
-                const removedUnit = await Unit.deleteOne({ _id: unitObjectId })
-                return removedUnit;
-            }
-            throw new AuthenticationError('You need to be logged in!');
-        },
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
 
-        addMother: async (parent, { childId, parentId }, context) => {
-            if (context.user) {
-                const updatedUnit = await Unit.findOneAndUpdate(
-                    { _id: childId },
-                    { $set: { mother: parentId } },
-                    { new: true }
-                ).populate('mother');
+      // return user;
+      const token = signToken(user);
+      return { token, user };
+    },
 
-                return updatedUnit;
-            }
+    addUnit: async (parent, args, context) => {
+        let unitInput = {...args}
+        console.log('wlr---',args.input);
+      if (context.user) {
+        const unit = await Unit.create(args.input);
+        return unit;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    removeUnit: async (parent, { unitObjectId }, context) => {
+      if (context.user) {
+        const removedUnit = await Unit.deleteOne({ _id: unitObjectId });
+        return removedUnit;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
 
-            throw new AuthenticationError('You need to be logged in!');
-        },
+    addMother: async (parent, { childId, parentId }, context) => {
+      if (context.user) {
+        const updatedUnit = await Unit.findOneAndUpdate(
+          { _id: childId },
+          { $set: { mother: parentId } },
+          { new: true }
+        ).populate("mother");
 
-        addFather: async (parent, { childId, parentId }) => {
+        return updatedUnit;
+      }
 
-            const updatedUnit = await Unit.findOneAndUpdate(
-                { _id: childId },
-                { $set: { father: parentId } },
-                { new: true }
-            ).populate('father');
+      throw new AuthenticationError("You need to be logged in!");
+    },
 
-            return updatedUnit;
+    addFather: async (parent, { childId, parentId }) => {
+      const updatedUnit = await Unit.findOneAndUpdate(
+        { _id: childId },
+        { $set: { father: parentId } },
+        { new: true }
+      ).populate("father");
 
-        }
-
-    }
-
-
+      return updatedUnit;
+    },
+  },
 };
 module.exports = resolvers;

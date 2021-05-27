@@ -30,7 +30,7 @@ Track and graph your family history with this MERN app. Log in and start with a 
 * Warren Rowland - Find me on [Linked In](https://www.linkedin.com/in/linkedinrowland/) or [GitHub](https://github.com/rolanduwxcc)
 
 ## Screenshots & Video How To
-INSERT AN IMAGE
+![Family Graph Screenshot](client/src/assets/img/screenshot.png)
 
 ## License & Copyrights
 Licensed under the [MIT License]('./LICENSE')
