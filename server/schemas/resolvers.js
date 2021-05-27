@@ -82,7 +82,7 @@ const resolvers = {
           { _id: childId },
           { $set: { mother: parentId } },
           { new: true }
-        ).populate("mother");
+        ).populate("mother").populate("father");
 
         return updatedUnit;
       }
@@ -96,7 +96,7 @@ const resolvers = {
           { _id: childId },
           { $set: { father: parentId } },
           { new: true }
-        ).populate("father");
+        ).populate("father").populate("mother");
 
         return updatedUnit;
       }

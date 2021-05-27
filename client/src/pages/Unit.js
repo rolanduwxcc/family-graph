@@ -8,7 +8,7 @@ import { ADD_UNIT } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const Unit = props => {
-    const { firstName: unitParam } = useParams();
+    const { unitId: unitParam } = useParams();
 
     const { loading, data } = useQuery(unitParam ? QUERY_UNIT : QUERY_ME, {
         variables: { firstName: unitParam }
