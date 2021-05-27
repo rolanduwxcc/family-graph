@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { QUERY_UNITS, QUERY_USER } from '../utils/queries';
+import { QUERY_UNITS } from '../utils/queries';
 
 import Auth from '../utils/auth';
 import UnitList from '../components/UnitList';
@@ -8,11 +8,12 @@ import UnitList from '../components/UnitList';
 const Home = () => {
 //   const { data: userData } = useQuery(QUERY_ME_BASIC);
  
-const { loading, data } = useQuery(QUERY_UNITS); //<-------WHOA!
-console.log('wlr---', data);
+const { loading, error, unitData } = useQuery(QUERY_UNITS); //<-------WHOA!
 
-const units = data?.units || [];
-console.log('wlr---',units);
+console.log('wlr--!', unitData);
+
+const units = unitData?.units || [];
+console.log('wlr--?',units);
   
   const loggedIn = Auth.loggedIn();
 
@@ -26,6 +27,7 @@ console.log('wlr---',units);
         ) : null}
 
         <div className={`col-12 mb-3 ${loggedIn && 'col-lg-8'}`}>
+          <br/>
           Hello World Again
           {loading ? (
             <div>Loading...</div>
