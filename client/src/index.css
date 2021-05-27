@@ -37,6 +37,22 @@ code {
 
 .flex-row{
   color: white;
-  
+}
 
+#first-welcome {
+  font-size: 30px;
+}
+
+#second-welcome { 
+    font-size: 18px;
+      text-align: center;
+
+}
+
+.flowconnections {
+  justify-content: center;
+}
+
+#p-welcome {
+  font-size: 18px;
 }

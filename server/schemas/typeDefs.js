@@ -39,7 +39,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         
-        addUnit(post: NewUnitInput): Unit      
+        addUnit(input: NewUnitInput): Unit      
         removeUnit(_id: ID!): Unit
 
         addMother(childId: ID!, parentId: ID!): Unit

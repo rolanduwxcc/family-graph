@@ -6,6 +6,8 @@ import { QUERY_USER, QUERY_ME, QUERY_UNIT } from '../utils/queries';
 // not sure if we want this one here but in case this is how we choose to add other members
 import { ADD_UNIT } from '../utils/mutations';
 import Auth from '../utils/auth';
+import { Flowpoint, Flowspace } from 'flowpoints';
+
 
 const Unit = props => {
     const { firstName: unitParam } = useParams();
