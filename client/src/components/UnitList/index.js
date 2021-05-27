@@ -15,7 +15,7 @@ return (
             <h5>
                 Possible Relatives
             </h5>
-            <Flowspace>
+            <Flowspace class= "flowspace">
 
                 {/* first point */}
                 <Flowpoint id="1member"
@@ -52,21 +52,7 @@ return (
 
                 </Flowpoint>
                 {/* third point */}
-                <Flowpoint id="3"
-                    key="point_"
-                    theme="indigo"
-                    variant="outlined"
-                    outputs={{
-                        "point_d": {
-                            output: "right",
-                            input: "left",
-                            outputColor: "#0c00ff",
-                            inputColor: "#ff0022",
-                            onClick: (key_a, key_b, e) => {
-                                console.log('Click connection ' + key_a + ' -> ' + key_b)
-                            }
-                        }
-                    }}>  <textarea name="message" rows="5" defaultValue={message} /></Flowpoint>
+             
                     
                     
                 <Flowpoint id="4"
@@ -85,6 +71,67 @@ return (
                     <textarea name="message" rows="5" defaultValue={message} />
 
                 </Flowpoint>
+                {/* forth member */}
+            <Flowpoint id="3"
+                key="point_g"
+                theme="indigo"
+                variant="outlined"
+                outputs={{
+                    "point_d": {
+                        output: "right",
+                        input: "left",
+                        outputColor: "#0c00ff",
+                        inputColor: "#ff0022",
+                        onClick: (key_a, key_b, e) => {
+                            console.log('Click connection ' + key_a + ' -> ' + key_b)
+                        }
+                    }
+                }}>  <textarea name="message" rows="5" defaultValue={message} /></Flowpoint>
+{/*     Second Generation member A*/}
+            <Flowpoint id="6"
+                key="point_h"
+                outputs={{
+                    "point_g": {
+                        output: "auto",
+                        input: "auto",
+                        inputColor: "red"
+                    }
+                }}>
+                <textarea name="message" rows="5" defaultValue={message} />
+
+            </Flowpoint>
+            {/* Second Generation Member B */}
+            <Flowpoint id="6"
+                key="point_i"
+                outputs={{
+                    "point_e": {
+                        output: "auto",
+                        input: "auto",
+                        inputColor: "red"
+                    }
+                }}>
+                <textarea name="message" rows="5" defaultValue={message} />
+
+            </Flowpoint>
+            <Flowpoint id="6"
+                key="point_j"
+                outputs={{
+                    "point_i": {
+                        output: "auto",
+                        input: "auto",
+                        inputColor: "red"
+                    },
+                    "point_e": {
+                        output: "auto",
+                        input: "auto",
+                        inputColor: "red"
+                    }
+                }}>
+                <textarea name="message" rows="5" defaultValue={message} />
+
+            </Flowpoint>
+
+            {/* Mom and Dad */}
             <Flowpoint key="point_a" outputs={["point_c"]} id="5" >
                 <label htmlFor="message">Mom:</label>
 

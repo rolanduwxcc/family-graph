@@ -8,7 +8,7 @@
   --spacing-one: calc(1rem * 0.5);
   --spacing-two: calc(1rem);
   --spacing-five: calc(2.5rem);
-  background-color: black;
+  background-color: var(--secondary)
 
 }
 
@@ -29,6 +29,14 @@ code {
   font-size: 80px;
 }
 
-div.flowpoint {
-  background-color: red;
+.text-center{
+  font-size: 18px;
+  justify-content: space-between;
+
+}
+
+.flex-row{
+  color: white;
+  
+
 }
