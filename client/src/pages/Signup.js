@@ -24,9 +24,10 @@ const Signup = () => {
             const { data } = await addUser({
                 variables: { ...formState }
             });
-
+            console.log('wlr--before Auth.login',data);
             Auth.login(data.addUser.token);
         } catch (e) {
+            console.log('wlr--before console error',e)
             console.error(e);
         }
     };

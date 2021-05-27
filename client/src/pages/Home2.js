@@ -8,25 +8,22 @@ import UnitList from '../components/UnitList';
 const Home = () => {
 //   const { data: userData } = useQuery(QUERY_ME_BASIC);
  
-const { loading, error, unitData } = useQuery(QUERY_UNITS); //<-------WHOA!
+const { loading, error, data } = useQuery(QUERY_UNITS); //<-------WHOA!
+console.log('wlr--data!--', data);
 
-console.log('wlr--!', unitData);
-
-const units = unitData?.units || [];
-console.log('wlr--?',units);
+const units = data?.units || [];
+console.log('wlr--units?--',units);
   
   const loggedIn = Auth.loggedIn();
 
   return (
-    <main>
+    <main className="container-fluid">
       <div className='flex-row justify-space-between'>
-        {loggedIn ? (
           <div className="col-12 mb-3">
             Hello World
           </div>
-        ) : null}
 
-        <div className={`col-12 mb-3 ${loggedIn && 'col-lg-8'}`}>
+          <div className="col-12 mb-3">
           <br/>
           Hello World Again
           {loading ? (
@@ -36,11 +33,6 @@ console.log('wlr--?',units);
           )}
         </div>
 
-        {loggedIn ? (
-          <div className="col-12 col-lg-3 mb-3">
-              Only if you are logged in
-          </div>
-        ) : null}
       </div>
     </main>
   );
