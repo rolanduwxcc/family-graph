@@ -58,9 +58,11 @@ const resolvers = {
     },
 
     addUnit: async (parent, args, context) => {
-        let unitInput = {...args}
-        console.log('wlr---',args.input);
       if (context.user) {
+        //because in my typeDefs i defined an input variable
+        //in order dump out the object args i need to use dot
+        //notation to get to destruct the args variable and feed
+        //object of key value pairs
         const unit = await Unit.create(args.input);
         return unit;
       }
@@ -88,14 +90,17 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addFather: async (parent, { childId, parentId }) => {
-      const updatedUnit = await Unit.findOneAndUpdate(
-        { _id: childId },
-        { $set: { father: parentId } },
-        { new: true }
-      ).populate("father");
+    addFather: async (parent, { childId, parentId }, context) => {
+      if (context.user) {
+        const updatedUnit = await Unit.findOneAndUpdate(
+          { _id: childId },
+          { $set: { father: parentId } },
+          { new: true }
+        ).populate("father");
 
-      return updatedUnit;
+        return updatedUnit;
+      }
+      throw new AuthenticationError("You need to be logged in buddy!");
     },
   },
 };
