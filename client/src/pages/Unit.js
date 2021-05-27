@@ -6,6 +6,8 @@ import { QUERY_USER, QUERY_ME, QUERY_UNIT } from '../utils/queries';
 // not sure if we want this one here but in case this is how we choose to add other members
 import { ADD_UNIT } from '../utils/mutations';
 import Auth from '../utils/auth';
+import { Flowpoint, Flowspace } from 'flowpoints';
+
 
 const Unit = props => {
     const { firstName: unitParam } = useParams();
@@ -33,8 +35,27 @@ const Unit = props => {
     return (
         <div>
             <div>
-                <h2>Viewing {unitParam ? `${unit.lastName}'s` : 'your'} profile.</h2>
-            </div>
+                <Flowspace>
+                    {/* <Flowpoint key="point_a" outputs={["point_b"]}>
+                    Start Here typing in Family Information
+                </Flowpoint>
+                <Flowpoint key="point_b">
+                    Another Family Member
+                </Flowpoint> */}
+                    <Flowpoint
+                        key="point_a"
+                        outputs={{
+                            "point_b": {
+                                output: "auto",
+                                input: "auto",
+                                inputColor: "red"
+                            },
+                            "point_": {
+                                output: "right",
+                                input: "left"
+                            }
+                        }}>Hello World!</Flowpoint>
+                </Flowspace>            </div>
             <div>
 
             </div>
