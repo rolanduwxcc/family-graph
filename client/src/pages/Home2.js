@@ -19,13 +19,13 @@ console.log('wlr--units?--',units);
   return (
     <main className="container-fluid">
       <div className='flex-row justify-space-between'>
-          <div className="col-12 mb-3">
-            Hello World
+          <div className="col-12 mb-3" id="first-welcome">
+          Welcome to Family Graph! Please move the boxes below to create a flow chart for you family. Right click to add text.
           </div>
 
           <div className="col-12 mb-3">
           <br/>
-          Hello World Again
+         
           {loading ? (
             <div>Loading...</div>
           ) : (
