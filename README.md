@@ -13,7 +13,7 @@
 Track and graph your family history with this MERN app. Log in and start with a source person (yourself) and start adding/linking ancestors.
 
 ## Installation Instructions
-* Visit INSERT DEPLOYED LINKED APP
+* Visit [Family Graph](https://blooming-reaches-99223.herokuapp.com/)
 
 ## Built With These Tools & Technologies
 * [MongoDB]()/[Mongoose]()
