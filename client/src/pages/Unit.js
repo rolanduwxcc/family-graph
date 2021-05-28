@@ -10,7 +10,7 @@ import { Flowpoint, Flowspace } from 'flowpoints';
 
 
 const Unit = props => {
-    const { firstName: unitParam } = useParams();
+    const { unitId: unitParam } = useParams();
 
     const { loading, data } = useQuery(unitParam ? QUERY_UNIT : QUERY_ME, {
         variables: { firstName: unitParam }

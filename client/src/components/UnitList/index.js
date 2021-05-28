@@ -288,7 +288,7 @@ Great Grandchild
 
             {units.map(unit => (
                 <button className="btn w-100 display-block mb-2" key={unit._id}>
-                    <Link to={`/unit/${unit.firstName}`}>{unit.firstName}</Link>
+                    <Link to={`/unit/${unit._id}`}>{unit.firstName}</Link>
                 </button>
             ))}
         </div>
